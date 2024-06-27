@@ -1,13 +1,13 @@
-from typing import Any, Dict, Union
+from typing import Any, Dict
 
 import requests as rq
 
 
 class HttpRequester:
-    def __init__(self) -> Dict[str, Any]:
+    def __init__(self) -> None:
         self.url = 'https://apisidra.ibge.gov.br/values/t/5457/n1/all/n3/all/u/y/v/214,216,8331/p/all/c782/40099,40102,40106,40119,40122,40124,40127,40136,40139,40151,40329'
 
-    def http_response(self):
+    def http_response(self) -> Dict[str, Any]:
         try:
             response = rq.get(self.url)
             response.raise_for_status()
