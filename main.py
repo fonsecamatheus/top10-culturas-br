@@ -1,5 +1,6 @@
 from src.extract.data_extract import DataExtract
 from src.extract.http_requester import HttpRequester
+from src.load.data_load import DataLoad
 from src.transform.data_transform import DataTransform
 
 if __name__ == '__main__':
@@ -9,4 +10,5 @@ if __name__ == '__main__':
     data_extract = data.extract_values()
     df = DataTransform(data_extract)
     df = df.data_transforms()
-    print(df.head())
+    data_load = DataLoad(df)
+    data_load.load_data()
