@@ -23,7 +23,19 @@ class DataTransform:
         self.df['VALOR'] = self.df['VALOR'].replace({'...': None, '-': None}).astype('float32')
         self.df['ANO'] = self.df['ANO'].astype('int32')
 
-        return self.df
+        d_produto = self.df[['PRODUTO']].drop_duplicates().reset_index(drop=True)
+        d_local = self.df[['LOCAL']].drop_duplicates().reset_index(drop=True)
+        d_variavel = self.df[['VARIAVEL']].drop_duplicates().reset_index(drop=True)
+        d_tempo = self.df[['ANO']].drop_duplicates().reset_index(drop=True)
+
+        dimensions = {
+            'd_produto': d_produto,
+            'd_local': d_local,
+            'd_variavel': d_variavel,
+            'd_tempo': d_tempo
+        }
+
+        return self.df, dimensions
 
     
     
