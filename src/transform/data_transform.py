@@ -11,8 +11,7 @@ class DataTransform:
         #Deletando colunas do df
         self.df.drop(['NC', 'NN', 'MC', 'D1C', 'D2C', 'D3C', 'D4C'], axis=1, inplace=True)
         #Renomeando as colunas do df
-        self.df.rename(columns={'MN':'UNIDADE', 'V':'VALOR', 'D1N': 'LOCAL', 'D2N':'VARIAVEL', 'D3N':'ANO', 'D4N':'PRODUTO'}, inplace=True)
-            
+        self.df.rename(columns={'MN':'UNIDADE', 'V':'VALOR', 'D1N': 'LOCAL', 'D2N':'VARIAVEL', 'D3N':'ANO', 'D4N':'PRODUTO'}, inplace=True)     
         #Tratando os valores da coluna PRODUTO 
         self.df['PRODUTO'] = self.df['PRODUTO'].str.replace(' (em caroço)', '')\
                                                .str.replace(' (em casca)', '')\
@@ -21,8 +20,9 @@ class DataTransform:
                                                .str.replace(' (em grão)', '')\
                                                .str.replace(' Total', '')
 
-        #Tratando os valores '...' e '-' da coluna VALOR    
-        self.df['VALOR'] = self.df['VALOR'].replace('...', '0').replace('-', '0')   
+        self.df['VALOR'] = self.df['VALOR'].replace({'...': None, '-': None}).astype('float32')
+        self.df['ANO'] = self.df['ANO'].astype('int32')
+
         return self.df
 
     
